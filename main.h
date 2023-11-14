@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <string.h>
-/*
+
 unsigned int is_delim(char c, char *delim)
 {
 while(*delim != '\0')
@@ -64,7 +64,7 @@ return (ret);
 src++;
 }
 }
-*/
+
 
 
 #endif
