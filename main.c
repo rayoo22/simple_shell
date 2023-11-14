@@ -59,10 +59,10 @@ i++;
 }
 
 j = 0;
-arg[j] = strtok(buffer, delim);
+arg[j] = my_strtok(buffer, delim);
 while (arg[j])
 {
-arg[++j] = strtok(NULL, delim);
+arg[++j] = my_strtok(NULL, delim);
 }
 
 child_ID = fork();
