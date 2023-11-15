@@ -1,94 +1,69 @@
 #include "main.h"
-/**/
-
-/**/
-int main(int c, char **env)
+/**
+ * main - 
+ * @c:
+ * @argv:
+ * Return: 
+*/
+int main(int c, char **argv)
 {
-char *prompt;
-char *buffer;
-char *arg[11];
-char *delim;
-size_t buffsize = 0;
-ssize_t n_chars;
-pid_t child_ID;
-int status, i, j;
-char *path;
 (void)c;
-
-prompt = "(Shell)$ ";
-buffer = NULL;
-delim = " \n";
+char *prompt = "(shell)> $ ";
+char *buffer, *cpy_buff, *token;
+size_t size = 0;
+ssize_t num_chars;
+const char *delim = " \n";
+int num_tokens = 0, i;
 
 while (1)
 {
-if (isatty(0))
+printf("%s", prompt);
+/* to get input from user */
+num_chars = getline(&buffer, &size, stdin);
+
+if (num_chars == -1)
 {
-_printstring(prompt);
+printf("Exiting (shell)> $ .....\n");
+return (-1);
 }
 
-n_chars = getline(&buffer, &buffsize, stdin);
-if (n_chars == -1)
+cpy_buff = malloc(sizeof(char) * num_chars);
+if (cpy_buff == NULL)
 {
-_putchar('\n');
+perror("Memory allocation failed\n");
+return (-1);
+}
+
+strcpy(cpy_buff, buffer);
+
+token = strtok(buffer, delim);
+
+while (token != NULL)
+{
+num_tokens++;
+token = strtok(NULL, delim);
+}
+num_tokens++;
+
+argv = malloc(sizeof(char *) * num_tokens);
+
+token = strtok(cpy_buff, delim);
+for (i = 0; token != NULL; i++)
+{
+argv[i] = malloc(sizeof(char) * strlen(token));
+strcpy(argv[i], token);
+
+token = strtok(NULL, delim);
+
+printf("%s\n", argv[i]);
+}
+
+/* printf("%s\n", buffer); */
+}
+
+free(cpy_buff);
+free(argv);
 free(buffer);
-exit(0);
-}
 
-i = 0;
-while (buffer[i])
-{
-if (buffer[i] == '\n')
-{
-buffer[i] = 0;
-}
-i++;
-}
-
-j = 0;
-arg[j] = my_strtok(buffer, delim);
-while (arg[j])
-{
-arg[++j] = my_strtok(NULL, delim);
-}
-arg[j] = NULL;
-
-path = get_loc(arg[0]);
-
-if (path == NULL)
-{
-if (_builtInCmd(arg) != 0)
-{
-_printstring("cd");
-continue;
-}
-else
-{
-_printstring("Command not found\n");
-}
-continue;
-}
-
-child_ID = fork();
-if (child_ID < 0)
-{
-_printstring("Forking failed");
-free(buffer);
-exit(0);
-}
-else if (child_ID == 0)
-{
-if (execve(path, arg, env) == -1)
-{
-_printstring("Command does not exist\n");
-}
-}
-else
-{
-wait(&status);
-}
-/* _printstring(buffer); */
-}
-free(path);
-free(buffer);
 return (0);
 }
