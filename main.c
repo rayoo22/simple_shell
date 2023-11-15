@@ -4,22 +4,17 @@
 /**/
 int main(int c, char **env)
 {
-char *prompt;
-char *buffer;
-char *arg[11];
-char *delim;
+char *prompt, *path, *buffer, *arg[11], *delim;
 size_t buffsize = 0;
 ssize_t n_chars;
 pid_t child_ID;
 int status, i, j;
-char *path;
 (void)c;
 
 prompt = "(Shell)$ ";
 buffer = NULL;
 delim = " \n";
-
-prompt 
+ 
 while (1)
 {
 if (isatty(0))
