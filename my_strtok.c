@@ -26,6 +26,7 @@ if (!src)
 {
 return (NULL);
 }
+
 while(1)
 {
 if (is_delim(*src, delim))
