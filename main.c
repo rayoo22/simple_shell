@@ -1,7 +1,10 @@
 #include "main.h"
-/**/
+/**
+ main - creates a simple shell
+ Return (0) on success
+ */
 
-/**/
+/* env - environment variables*/
 int main(int c, char **env)
 {
 char *prompt, *path, *buffer, *arg[11], *delim;

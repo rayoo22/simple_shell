@@ -1,5 +1,7 @@
 #include "main.h"
-
+/**
+script used to terminate the shell
+*/
 int _builtInCmd(char **arg)
 {
 if (strcmp(arg[0], "exit") == 0)

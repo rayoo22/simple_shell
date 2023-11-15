@@ -1,4 +1,7 @@
 #include "main.h"
+/**
+_putchar - outputs of characters and string
+*/
 
 int _putchar(char c)
 {

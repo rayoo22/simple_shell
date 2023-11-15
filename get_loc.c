@@ -31,9 +31,7 @@ free(filePath);
 free(path_cpy);
 /*
 if (stat(arg, &buff) == 0)
-{
 return (arg);
-}
 */
 return (NULL);
 }
