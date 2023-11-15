@@ -15,6 +15,7 @@ ssize_t num_chars;
 const char *delim = " \n";
 int num_tokens = 0, i;
 
+prompt 
 while (1)
 {
 printf("%s", prompt);
