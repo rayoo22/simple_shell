@@ -64,7 +64,10 @@ return (ret);
 src++;
 }
 }
+/**/
+int _putchar(char c);
+int _printstring(char *str);
+char *get_loc(char *arg);
+char *location(char *path, char *arg)
 
-
-
-#endif
+#endif 
