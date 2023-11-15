@@ -1,10 +1,9 @@
 #include "main.h"
 
-char *location(char *path, char *arg)
+char *location(char *path, char *arg) 
 {
 char *path_cpy, *pathToken, *filePath;
-char *delim, *buff;
-
+char *delim; /*buff;*/
 
 delim = ":";
 path_cpy = strdup(path);
@@ -19,33 +18,36 @@ strcat(filePath, "/");
 strcat(filePath, arg);
 strcat(filePath, "\0");
 
-if (filePath)
+if (access(filePath, X_OK) == 0)
 {
+free(path_cpy);
+return (filePath);
+}
 pathToken = my_strtok(NULL, delim);
 }
-}
+
 
 free(filePath);
-
+free(path_cpy);
+/*
 if (stat(arg, &buff) == 0)
 {
 return (arg);
 }
+*/
 return (NULL);
 }
-
-/***/
 
 char *get_loc(char *arg)
 {
 char *path;
-if (access("PATH", X_OK) == 0)
-{
+
 path = getenv("PATH");
-}
+
 if (path)
 {
-path = loc(path, arg);
+path = location(path, arg);
 return (path);
 }
+return (NULL);
 }
